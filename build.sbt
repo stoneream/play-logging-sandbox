@@ -8,6 +8,11 @@ lazy val root = (project in file("."))
     scalaVersion := crossScalaVersions.value.head,
     libraryDependencies ++= Seq(
       guice,
+      "net.logstash.logback" % "logstash-logback-encoder" % "8.0",
+      // jackson について
+      // https://github.com/auth0/jwks-rsa-java/issues/192#issuecomment-2171800538
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.17.1",
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.17.1",
       "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test
     ),
     scalacOptions ++= Seq(
