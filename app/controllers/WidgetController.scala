@@ -1,8 +1,9 @@
 package controllers
 
 import javax.inject.Inject
-
 import models.Widget
+import net.logstash.logback.argument.StructuredArguments.kv
+import org.slf4j.LoggerFactory
 import play.api.data._
 import play.api.i18n._
 import play.api.mvc._
@@ -20,6 +21,8 @@ import scala.collection._
  * for details.
  */
 class WidgetController @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
+  private val logger = LoggerFactory.getLogger(this.getClass)
+
   import WidgetForm._
 
   private val widgets = mutable.ArrayBuffer(
@@ -55,6 +58,9 @@ class WidgetController @Inject() (cc: MessagesControllerComponents) extends Mess
       // This is the good case, where the form was successfully parsed as a Data object.
       val widget = Widget(name = data.name, price = data.price)
       widgets += widget
+
+      logger.info("Widget added {}, {}", kv("name", widget.name), kv("price", widget.price))
+
       Redirect(routes.WidgetController.listWidgets).flashing("info" -> "Widget added!")
     }
 
