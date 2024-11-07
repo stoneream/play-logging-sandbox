@@ -19,7 +19,7 @@ import scala.collection._
  * See https://www.playframework.com/documentation/latest/ScalaForms#Passing-MessagesProvider-to-Form-Helpers
  * for details.
  */
-class WidgetController @Inject()(cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
+class WidgetController @Inject() (cc: MessagesControllerComponents) extends MessagesAbstractController(cc) {
   import WidgetForm._
 
   private val widgets = mutable.ArrayBuffer(
