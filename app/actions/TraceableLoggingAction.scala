@@ -1,6 +1,6 @@
-package action
+package actions
 
-import action.TraceableLoggingAction.TraceableRequest
+import actions.TraceableLoggingAction.TraceableRequest
 import net.logstash.logback.argument.StructuredArguments.kv
 import org.slf4j.{LoggerFactory, MDC}
 import play.api.i18n.MessagesApi

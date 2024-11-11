@@ -1,6 +1,6 @@
 package controllers
 
-import action.TraceableLoggingAction
+import actions.TraceableLoggingAction
 
 import javax.inject.Inject
 import models.Widget
