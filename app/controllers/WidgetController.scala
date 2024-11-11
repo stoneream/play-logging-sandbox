@@ -1,7 +1,5 @@
 package controllers
 
-import actions.TraceableLoggingAction
-
 import javax.inject.Inject
 import models.Widget
 import net.logstash.logback.argument.StructuredArguments.kv
@@ -23,7 +21,6 @@ import scala.collection._
  * for details.
  */
 class WidgetController @Inject() (
-    traceableLoggingAction: TraceableLoggingAction,
     cc: MessagesControllerComponents
 ) extends MessagesAbstractController(cc) {
   private val logger = LoggerFactory.getLogger(this.getClass)
@@ -41,17 +38,17 @@ class WidgetController @Inject() (
   // of the "WidgetController" references are inside the .scala file.
   private val postUrl = routes.WidgetController.createWidget
 
-  def index = traceableLoggingAction {
+  def index = Action {
     Ok(views.html.index())
   }
 
-  def listWidgets = traceableLoggingAction { implicit request =>
+  def listWidgets = Action { implicit request: MessagesRequest[AnyContent] =>
     // Pass an unpopulated form to the template
     Ok(views.html.listWidgets(widgets.toSeq, form, postUrl))
   }
 
   // This will be the action that handles our form post
-  def createWidget = traceableLoggingAction { implicit request =>
+  def createWidget = Action { implicit request: MessagesRequest[AnyContent] =>
     val errorFunction = { (formWithErrors: Form[Data]) =>
       // This is the bad case, where the form had validation errors.
       // Let's show the user the form again, with the errors highlighted.
