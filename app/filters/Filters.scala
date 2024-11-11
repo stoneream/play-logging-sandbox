@@ -5,10 +5,4 @@ import play.filters.csrf.CSRFFilter
 
 import javax.inject.Inject
 
-class Filters @Inject() (
-    accessLog: AccessLog,
-    csrfFilter: CSRFFilter
-) extends DefaultHttpFilters(
-      accessLog,
-      csrfFilter
-    ) {}
+class Filters @Inject() (accessLogFilter: AccessLogFilter, csrfFilter: CSRFFilter) extends DefaultHttpFilters(accessLogFilter, csrfFilter) {}
